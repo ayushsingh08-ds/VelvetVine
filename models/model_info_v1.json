@@ -1,0 +1,54 @@
+{
+  "version": "v1",
+  "trained_at_utc": "2026-04-14T15:09:42.767177+00:00",
+  "dataset": "data\\winequality-red.csv",
+  "csv_sep_detected": ";",
+  "features": [
+    "fixed acidity",
+    "volatile acidity",
+    "citric acid",
+    "residual sugar",
+    "chlorides",
+    "free sulfur dioxide",
+    "total sulfur dioxide",
+    "density",
+    "pH",
+    "sulphates",
+    "alcohol"
+  ],
+  "target": "good_wine",
+  "target_rule": "quality >= 7 => 1 else 0",
+  "model": "RandomForestClassifier",
+  "metrics": {
+    "accuracy": 0.940625,
+    "confusion_matrix_labels": [0, 1],
+    "confusion_matrix": [
+      [276, 1],
+      [18, 25]
+    ]
+  },
+  "split": {
+    "test_size": 0.2,
+    "random_state": 42,
+    "stratified": true,
+    "n_samples": 1599,
+    "n_train": 1279,
+    "n_test": 320,
+    "pos_rate_overall": 0.1357098186366479,
+    "pos_rate_train": 0.13604378420641125,
+    "pos_rate_test": 0.134375
+  },
+  "config": {
+    "data_path": "data\\winequality-red.csv",
+    "version": "v1",
+    "model_path": "models\\model_v1.pkl",
+    "scaler_path": "models\\scaler_v1.pkl",
+    "info_path": "models\\model_info_v1.json",
+    "test_size": 0.2,
+    "random_state": 42,
+    "stratify": true,
+    "n_estimators": 300,
+    "max_depth": null,
+    "n_jobs": 1
+  }
+}

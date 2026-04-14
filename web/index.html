@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VelvetVine - Wine Quality Predictor</title>
+    <link rel="stylesheet" href="/web/style.css" />
+  </head>
+  <body>
+    <main class="wrap">
+      <section class="hero">
+        <div class="panel">
+          <div class="panel-heading">
+            <h1>Predict Wine Quality</h1>
+            <div class="divider"></div>
+          </div>
+
+          <p class="lede">
+            Use our predictor to assess wine quality from chemical composition.
+          </p>
+          <p class="lede lede-emphasis">
+            A rating of 7 or higher is classified as <strong>good</strong>.
+          </p>
+
+          <form id="predict-form" class="form">
+            <div class="row">
+              <label class="label" for="wine-type">Wine Type</label>
+              <select id="wine-type" class="select" aria-label="Wine Type">
+                <option value="red" selected>Red</option>
+                <option value="white">White</option>
+              </select>
+              <div class="hint"></div>
+            </div>
+
+            <div class="slider">
+              <div class="slider-head">
+                <span class="label">Sweetness</span>
+                <span class="value" id="sweetness-val">Medium</span>
+              </div>
+              <input id="sweetness" type="range" min="0" max="100" value="45" />
+              <div class="slider-foot">
+                <span>Dry</span>
+                <span>Medium</span>
+                <span>Sweet</span>
+              </div>
+            </div>
+
+            <div class="slider">
+              <div class="slider-head">
+                <span class="label">Alcohol</span>
+                <span class="value"><span id="alcohol-pct">11.5</span> %</span>
+              </div>
+              <input id="alcohol" type="range" min="0" max="100" value="55" />
+              <div class="slider-foot">
+                <span>Low</span>
+                <span></span>
+                <span>High</span>
+              </div>
+            </div>
+
+            <div class="slider">
+              <div class="slider-head">
+                <span class="label">Acidity</span>
+                <span class="value" id="acidity-val">3.3</span>
+              </div>
+              <input id="acidity" type="range" min="0" max="100" value="50" />
+              <div class="slider-foot">
+                <span>Low</span>
+                <span></span>
+                <span>High</span>
+              </div>
+            </div>
+
+            <div class="buttons">
+              <button id="predict-btn" type="submit" class="primary">Predict Quality</button>
+              <button id="sample-balanced" type="button" class="secondary">Sample (Balanced)</button>
+              <button id="sample-low" type="button" class="secondary">Sample (Low Quality)</button>
+            </div>
+
+            <details class="advanced">
+              <summary>Advanced inputs (auto-updated)</summary>
+              <div class="grid">
+                <label>Fixed acidity <input name="fixed acidity" type="number" step="any" required /></label>
+                <label>Volatile acidity <input name="volatile acidity" type="number" step="any" min="0" required /></label>
+                <label>Citric acid <input name="citric acid" type="number" step="any" min="0" required /></label>
+                <label>Residual sugar <input name="residual sugar" type="number" step="any" min="0" required /></label>
+                <label>Chlorides <input name="chlorides" type="number" step="any" min="0" required /></label>
+                <label>Free sulfur dioxide <input name="free sulfur dioxide" type="number" step="any" min="0" required /></label>
+                <label>Total sulfur dioxide <input name="total sulfur dioxide" type="number" step="any" min="0" required /></label>
+                <label>Density <input name="density" type="number" step="any" min="0" required /></label>
+                <label>pH <input name="pH" type="number" step="any" required /></label>
+                <label>Sulphates <input name="sulphates" type="number" step="any" min="0" required /></label>
+                <label>Alcohol <input name="alcohol" type="number" step="any" min="0" required /></label>
+              </div>
+            </details>
+          </form>
+
+          <div class="resultcard">
+            <div class="result-title">Prediction Result</div>
+            <div class="result-main">
+              <div class="big">
+                Predicted class: <span class="good" id="pred">-</span>
+                <span class="small-inline">(<span id="pred-text">-</span>)</span>
+              </div>
+              <div class="big">
+                Probability of <span class="good">"Good"</span> Quality:
+                <span id="prob">-</span>
+              </div>
+              <div class="small" id="verdict">Submit inputs to see result.</div>
+              <div class="small" id="model-metrics"></div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="side">
+          <div class="legend">
+            <div class="legend-row">
+              <span class="legend-icon">^</span>
+              <span class="legend-name">Sulphates</span>
+              <div class="legend-bar bar-red"><span id="l-sul-bar"></span></div>
+              <span class="legend-state" id="l-sul">-</span>
+            </div>
+            <div class="legend-row">
+              <span class="legend-icon">i</span>
+              <span class="legend-name">Alcohol</span>
+              <div class="legend-bar bar-amber"><span id="l-alc-bar"></span></div>
+              <span class="legend-state" id="l-alc">-</span>
+            </div>
+            <div class="legend-row">
+              <span class="legend-icon">o</span>
+              <span class="legend-name">Residual Sugar</span>
+              <div class="legend-bar bar-green"><span id="l-sugar-bar"></span></div>
+              <span class="legend-state" id="l-sugar">-</span>
+            </div>
+            <div class="legend-row">
+              <span class="legend-icon">u</span>
+              <span class="legend-name">Chlorides</span>
+              <div class="legend-bar bar-gold"><span id="l-chl-bar"></span></div>
+              <span class="legend-state" id="l-chl">-</span>
+            </div>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <script src="/web/app.js"></script>
+  </body>
+</html>
