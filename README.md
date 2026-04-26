@@ -1,6 +1,7 @@
 # VelvetVine
 
 VelvetVine is a small ML demo project with:
+
 - `src/preprocess.py` to clean/prepare `data/dataset.csv`
 - `src/train.py` to train a simple model and write artifacts into `models/`
 - `api/main.py` to serve predictions via a FastAPI app and append requests to `logs/predictions.csv`
@@ -20,6 +21,7 @@ python -m src.train
 ```
 
 Artifacts are written to:
+
 - `models/model_v1.pkl`
 - `models/scaler_v1.pkl`
 - `models/model_info_v1.json`
@@ -27,6 +29,7 @@ Artifacts are written to:
 ## 2b) Retrain (new version)
 
 Add new labeled rows (same columns as the wine dataset, including `quality`) into:
+
 - `data/new_wine_data.csv` (optional)
 
 Then run:
@@ -51,9 +54,35 @@ uvicorn api.main:app --reload
 ```
 
 Open:
+
 - `http://127.0.0.1:8000/health`
 - `http://127.0.0.1:8000/docs`
 - `http://127.0.0.1:8000/model`
 
+## 4) Generate Model Accuracy and Confusion Matrix Charts
+
+```powershell
+python -m src.evaluate
+```
+
+This generates:
+
+- `web/assets/model_accuracy_comparison.png`
+- `web/assets/confusion_matrix_v1.png`
+- `web/assets/confusion_matrix_v2.png`
+
+### Model Accuracy Comparison
+
+![Model Accuracy Comparison](web/assets/model_accuracy_comparison.png)
+
+### Confusion Matrix (v1)
+
+![Confusion Matrix v1](web/assets/confusion_matrix_v1.png)
+
+### Confusion Matrix (v2)
+
+![Confusion Matrix v2](web/assets/confusion_matrix_v2.png)
+
 ## Notes
+
 - If you haven’t trained yet, the API will return an error on `/predict` until the model artifacts exist.
